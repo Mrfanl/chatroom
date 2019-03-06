@@ -4,7 +4,7 @@ mongoose.connect(DB_URL,{useNewUrlParser: true});
 
 const mondels = {
   user:{
-    'uer':{'type':String,'require':true},
+    'user':{'type':String,'require':true},
     'gender':{'type':Number,'require':true},
     'password':{'type':String,'require':true},
     //头像
