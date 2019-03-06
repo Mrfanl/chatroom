@@ -1,0 +1,19 @@
+
+
+.header-ul{
+   list-style-type: none;
+   padding-top: 1em;
+   padding-bottom: 1em;
+   border-bottom: 2px solid  #eee;
+   background:#24292e;
+
+}
+.header-li{
+   display: inline-block;
+    margin-right: 5%;
+    color:white;
+}
+.header-li a{
+  text-decoration: none;
+  color:white;
+}
