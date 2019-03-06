@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Header_Com from '../component/header_com';
+
 class Login extends React.Component{
   constructor(props){
     super(props);
@@ -11,7 +13,8 @@ class Login extends React.Component{
   render(){
     return(
       <div>
-        登录界面
+      <Header_Com/>
+        <h3>登录界面</h3>
       </div>
     )
   }
