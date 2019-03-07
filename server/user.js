@@ -8,7 +8,7 @@ const User = model.getModel('user');
 const _filiter = {'password':0};
 
 Router.post('/register',function(req,res){
-  const { user,gender,password } = req;
+  const { user,gender,password } = req.body;
   User.findOne({user},function(err,doc){
     if(doc){
       return res.json({code:1,msg:'用户名已存在'});
@@ -20,6 +20,18 @@ Router.post('/register',function(req,res){
       res.cookie('userid',doc._id);
       return res.json({code:0,data:doc});
     })
+  })
+})
+
+Router.post('/login',function(req,res){
+  const { user,password } = req.body;
+  User.findOne({user:user,password:md5Pwd(password)},_filiter,function(err,doc){
+    if(!doc){
+      return res.json({code:1,msg:'用户名不存在或密码错误'})
+    }else{
+      res.cookie('userid',doc._id);
+      return res.json({code:0,data:doc});
+    }
   })
 })
 

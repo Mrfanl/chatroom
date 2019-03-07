@@ -1,9 +1,12 @@
-const express = require('express')
-const userRouter = require('./user')
+const express = require('express');
+const bodyParser = require('body-parser');
+const userRouter = require('./user');
+
 
 const app = express()
 const server = require('http').Server(app)
 
+app.use(bodyParser.json());
 app.use('/user',userRouter)
 
 server.listen(9093,function(){
