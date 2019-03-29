@@ -1,3 +1,4 @@
+
 .register-card{
     width:300;
     position: absolute;
@@ -7,4 +8,21 @@
 }
 .msg{
   color:red
+}
+
+.left-nva{
+  width:10%;
+  float:left;
+  height: 100%;
+  margin-right: 0;
+}
+.right-content{
+  margin-top: 0;
+  width:90%;
+  float:right;
+  height:100%;
+}
+
+.MessageRow{
+  margin-top: 2em;
 }
