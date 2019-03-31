@@ -8,9 +8,9 @@ const initState = {
   redirectTo:'',
   isAuth:'',
   msg:'',
-  user:'',
+  NickName:'',
   gender:'',
-  password:''
+  Password:''
 }
 
 export function User(state=initState,action){
@@ -39,16 +39,16 @@ function errorMsg(data){
   return {type:ERROR_MSG,payload:data};
 }
 
-export function register({user,gender,password,repassword}){
-  if(!user||!password||!repassword){
+export function register({NickName,gender,Password,repassword}){
+  if(!NickName||!Password||!repassword){
     return errorMsg('用户名密码不能为空');
   }
 
-  if(password!==repassword){
+  if(Password!==repassword){
     return errorMsg('密码不一致');
   }
   return dispatch =>{
-    axios.post('/user/register',{user,gender,password,repassword})
+    axios.post('/user/register',{NickName,gender,Password,repassword})
     .then(res=>{
       if(res.status===200&&res.data.code===0){
         dispatch(register_sucess(res.data.data))
@@ -60,13 +60,13 @@ export function register({user,gender,password,repassword}){
   }
 }
 
-export function login({user,password}){
-  if(!user||!password){
+export function login({NickName,Password}){
+  if(!NickName||!Password){
     return errorMsg('用户名密码不能为空');
   }
 
   return dispatch =>{
-    axios.post('/user/login',{user,password})
+    axios.post('/user/login',{NickName,Password})
     .then(res=>{
       if(res.status===200&&res.data.code===0){
         dispatch(login_sucess(res.data.data))

@@ -5,15 +5,15 @@ const Router = express.Router();
 const model = require('./models');
 const User = model.getModel('user');
 
-const _filiter = {'password':0};
+const _filiter = {'Password':0};
 
 Router.post('/register',function(req,res){
-  const { user,gender,password } = req.body;
-  User.findOne({user},function(err,doc){
+  const { NickName,Gender,Password } = req.body;
+  User.findOne({NickName},function(err,doc){
     if(doc){
       return res.json({code:1,msg:'用户名已存在'});
     }
-    User.create({user,password:md5Pwd(password),gender},function(err,doc){
+    User.create({NickName,Password:md5Pwd(Password),Gender},function(err,doc){
       if(err){
         return res.json({code:1,msg:后端出错了});
       }
@@ -24,8 +24,8 @@ Router.post('/register',function(req,res){
 })
 
 Router.post('/login',function(req,res){
-  const { user,password } = req.body;
-  User.findOne({user:user,password:md5Pwd(password)},_filiter,function(err,doc){
+  const { NickName,Password } = req.body;
+  User.findOne({NickName:NickName,Password:md5Pwd(Password)},_filiter,function(err,doc){
     if(!doc){
       return res.json({code:1,msg:'用户名不存在或密码错误'})
     }else{

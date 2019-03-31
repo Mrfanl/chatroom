@@ -15,9 +15,9 @@ class Register extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      user:'',
-      gender:1,
-      password:'',
+      NickName:'',
+      Gender:1,
+      Password:'',
       repassword:''
     }
   }
@@ -45,12 +45,12 @@ class Register extends React.Component{
         <Input
         prefix={ <Icon type="user" style={{ color:'#08c' }} /> }
         placeholder="username"
-        onChange={e=>this.handleChange("user",e.target.value)}
+        onChange={e=>this.handleChange("NickName",e.target.value)}
         />
         <p/>
         <RadioGroup
-        onChange={e=>this.handleChange("gender",e.target.value)}
-        value={this.state.gender}>
+        onChange={e=>this.handleChange("Gender",e.target.value)}
+        value={this.state.Gender}>
           <Radio value={1} style={{ 'marginRight':'60px'}}>男生</Radio>
           <Radio value={2}>女生</Radio>
         </RadioGroup>
@@ -58,7 +58,7 @@ class Register extends React.Component{
         <Input.Password
         prefix={<Icon type="lock" style={{ color: '#08c' }} />}
         placeholder="Password"
-        onChange={e=>this.handleChange("password",e.target.value)}
+        onChange={e=>this.handleChange("Password",e.target.value)}
         />
         <p/>
         <Input.Password

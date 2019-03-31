@@ -70,18 +70,15 @@ class Meinfo extends React.Component{
     const { result } = this.state;
     const children = result.map(email => <Option key={email}>{email}</Option>);
     return (
-
-
       <div>
       <Row type="flex" justify="start">
         <Col span={2} xs>
           <a href="#"><Avatar size="large" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/></a>
         </Col>
-
         {this.state.isChange[0]?
-          <Input type="text" placeholder={this.state.NickName} style={{ 'width':'200px' }}  onBlur={()=>this.onBlur(0)} onPressEnter={(e)=>this.changeState("NickName",e.target.value,0)}  autoFocus/>
-          :<h2 >{this.state.NickName}</h2>}
-      <Icon type="edit" theme="twoTone" style={{'margin-left':'1em','margin-top':'10px'}} onClick={()=>this.selectChange(0)}/>
+        <Input type="text" placeholder={this.state.NickName} style={{ 'width':'200px' }}  onBlur={()=>this.onBlur(0)} onPressEnter={(e)=>this.changeState("NickName",e.target.value,0)}  autoFocus/>
+        :<h2 >{this.state.NickName}</h2>}
+        <Icon type="edit" theme="twoTone" style={{'margin-left':'1em','margin-top':'10px'}} onClick={()=>this.selectChange(0)}/>
 
       </Row>
       <Divider dashed />
@@ -92,9 +89,8 @@ class Meinfo extends React.Component{
           :<span>{this.state.Name}</span>}
           <Icon type="edit" theme="twoTone" style={{'margin-left':'1em','margin-top':'10px'}} onClick={()=>this.selectChange(1)}/>
         </Col>
-
         <Col span={10}>性别&emsp;
-        {this.state.isChange[2]?
+          {this.state.isChange[2]?
           <Select defaultValue={this.state.Gender} style={{ 'width':'100px'}} onBlur={()=>this.onBlur(2)} onSelect={(v)=>this.changeState("Gender",v,2)} autoFocus open><Option value="男">男</Option><Option value="女">女</Option></Select>
           :<span>{this.state.Gender}</span>}
           <Icon type="edit" theme="twoTone" style={{'margin-left':'1em','margin-top':'10px'}} onClick={()=>this.selectChange(2)}/>
@@ -108,18 +104,14 @@ class Meinfo extends React.Component{
           :<span>{this.state.Birthday}</span>}
           <Icon type="edit" theme="twoTone" style={{'margin-left':'1em','margin-top':'10px'}} onClick={()=>this.selectChange(3)}/>
         </Col>
-
-
         <Col span={10}>家庭住址 &emsp;
           {this.state.isChange[4]?
           <Cascader options={residence} onChange={(e)=>this.changeState("Address",e,4)} onBlur={()=>this.onBlur(4)} style={{ 'width':'200px' }} placeholder={this.state.Address} autoFocus/>
           :<span>{this.state.Address}</span>}
           <Icon type="edit" theme="twoTone" style={{'margin-left':'1em','margin-top':'10px'}} onClick={()=>this.selectChange(4)}/>
         </Col>
-
-
-
       </Row>
+
       <Row type="flex" justify="center" className={"MessageRow"}>
         <Col span={10}>邮箱 &emsp;
           {this.state.isChange[5]?
@@ -127,9 +119,6 @@ class Meinfo extends React.Component{
             :<span>{this.state.Email}</span>}
           <Icon type="edit" theme="twoTone" style={{'margin-left':'1em','margin-top':'10px'}} onClick={()=>this.selectChange(5)}/>
         </Col>
-
-
-
         <Col span={10}>备注 &emsp;
           {this.state.isChange[6]?
           <Input type="text"  style={{ 'width':'200px' }} onBlur={()=>this.onBlur(6)} placeholder={this.state.Note}  onPressEnter={(e)=>this.changeState("Note",e.target.value,6)} autoFocus   />

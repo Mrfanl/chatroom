@@ -12,8 +12,8 @@ class Login extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      user:'',
-      password:''
+      NickName:'',
+      Password:''
     }
   }
 
@@ -50,14 +50,14 @@ class Login extends React.Component{
             <Input
             prefix={ <Icon type="user" style={{ color:'#08c' }} /> }
             placeholder="username"
-            onChange={e=>this.handleChange("user",e.target.value)}
+            onChange={e=>this.handleChange("NickName",e.target.value)}
             />
             <p/>
             <p>密码</p>
             <Input.Password
             prefix={<Icon type="lock" style={{ color: '#08c' }} />}
             placeholder="Password"
-            onChange={e=>this.handleChange("password",e.target.value)}
+            onChange={e=>this.handleChange("Password",e.target.value)}
             />
             <p/>
             <p>

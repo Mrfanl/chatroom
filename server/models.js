@@ -4,13 +4,18 @@ mongoose.connect(DB_URL,{useNewUrlParser: true});
 
 const mondels = {
   user:{
-    'user':{'type':String,'require':true},
-    'gender':{'type':Number,'require':true},
-    'password':{'type':String,'require':true},
+    'NickName':{'type':String,'require':true},
+    //真实姓名
+    'Name':{'type:':String},
+    'Gender':{'type':Number,'require':true},
+    'Password':{'type':String,'require':true},
+    'Birthday':{'type':String},
+    'Address':{'type':String},
+    'Email':{'type':String},
     //头像
-    'avatar':{'type':String},
+    'Avatar':{'type':String},
     //个人简介
-    'dsc':{'type':String},
+    'Note':{'type':String},
   }
 }
 
