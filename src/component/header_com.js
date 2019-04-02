@@ -1,8 +1,7 @@
 import React from 'react';
 import { Input,Icon,Button } from 'antd';
-
+import browserCookie from 'browser-cookies';
 import '../static/layout.css';
-
 
 const Search = Input.Search;
 
@@ -13,6 +12,12 @@ class Header_Com extends React.Component{
       current:'',
     }
   }
+
+  handleLogout = ()=>{
+    browserCookie.erase('user');
+    window.location.href = window.location.href
+  }
+
   render(){
     return(
       <ul className="header-ul">
@@ -26,7 +31,8 @@ class Header_Com extends React.Component{
          style={{width:200}}/>
         </li>
         <li className="header-li">
-           <a href="/register"><Button ghost>注册</Button></a>
+           <a href="/register" style={{'marginRight':'1em'}}><Button ghost>注册</Button></a>
+           <Button ghost onClick={()=>this.handleLogout()}>退出</Button>
         </li>
      </ul>
     );

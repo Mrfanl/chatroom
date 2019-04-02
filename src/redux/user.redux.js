@@ -30,7 +30,7 @@ export function User(state=initState,action){
     case ERROR_MSG:
         return {...state,isAuth:false,msg:action.payload};
     case LOGIN_SUCCESS:
-        return {...state,isAuth:true,redirectTo:'/',...action.payload};
+        return {...state,isAuth:true,redirectTo:'/mycenter',...action.payload};
     case QUERY_SUCCESS:
         return {...state,...action.payload,isAuth:true}
     case CHANGE_SUCCESS:
@@ -120,9 +120,9 @@ export function query_one(NickName){
 }
 
 //改变个人信息
-export function change_one({NickName,Name,Birthday,Gender,Address,Email,Note}){
+export function change_one({NickName,Name,Avatar,Birthday,Gender,Address,Email,Note}){
   return dispatch=>{
-    axios.post('/user/change_one',{NickName,Name,Birthday,Gender,Address,Email,Note})
+    axios.post('/user/change_one',{NickName,Name,Avatar,Birthday,Gender,Address,Email,Note})
     .then(res=>{
       if(res.status===200&&res.data.code===0){
         dispatch(change_success(res.data.data));

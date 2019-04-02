@@ -37,8 +37,8 @@ Router.post('/query_one',function(req,res){
 
 //改变个人信息
 Router.post('/change_one',function(req,res){
-  const {NickName,Name,Birthday,Gender,Address,Email,Note} = req.body;
-      User.updateOne({NickName:NickName},{$set:{NickName:NickName,Name:Name,Birthday:Birthday,Gender:Gender,Address:Address,Email:Email,Note:Note}},function(err,doc){
+  const {NickName,Name,Avatar,Birthday,Gender,Address,Email,Note} = req.body;
+      User.updateOne({NickName:NickName},{$set:{NickName:NickName,Name:Name,Avatar:Avatar,Birthday:Birthday,Gender:Gender,Address:Address,Email:Email,Note:Note}},function(err,doc){
         if(err){
           return res.json({code:1,msg:"后端出错"})
         }

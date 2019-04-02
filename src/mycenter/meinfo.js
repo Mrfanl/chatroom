@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar,Row,Col,Divider,Icon,Input,Select,DatePicker,Cascader,AutoComplete} from 'antd';
+import { Avatar,Row,Col,Divider,Icon,Input,Select,DatePicker,Cascader,AutoComplete,Modal,List} from 'antd';
 import { connect } from 'react-redux';
 import provinces from "china-division/dist/provinces.json";
 import cities from "china-division/dist/cities.json";
@@ -11,7 +11,6 @@ import { query_one,change_one } from '../redux/user.redux';
 import getCookie from '../util/getCookie';
 
 const Option = Select.Option;
-
 
 areas.forEach(area => {
   const matchCity = cities.filter(city => city.code === area.cityCode)[0];
@@ -53,10 +52,12 @@ class Meinfo extends React.Component{
       Birthday:'',
       Gender:'',
       Address:'',
+      Avatar:'',//
       Email:'',
       Note:'',
       isChange:[0,0,0,0,0,0,0],
-      result: []//用于输入邮箱
+      result: [],//用于输入邮箱
+      visible:false,//用于头像选择框是否显示
     }
   }
 
@@ -71,7 +72,8 @@ class Meinfo extends React.Component{
         Gender:this.props.Gender,
         Address:this.props.Address,
         Email:this.props.Email,
-        Note:this.props.Note
+        Note:this.props.Note,
+        Avatar:this.props.Avatar,
       });
     },500);
   }
@@ -117,15 +119,56 @@ class Meinfo extends React.Component{
    this.setState({ result });
  }
 
+//头像选择框点击确定
+ handleOk = (e) => {
+   this.setState({
+     visible: false,
+   });
+   this.props.change_one(this.state);
+ }
+
+//头像选择框点击取消
+ handleCancel = (e) => {
+   this.setState({
+     visible: false,
+   });
+ }
+
+ //点击头像显示出头像选择框
+ selectAvatar = ()=>{
+   this.setState({
+     visible: true,
+   });
+ }
+
+//点击头像选择指定的头像
+ clickAvatar = (v)=>{
+   this.setState({
+     Avatar:v
+   });
+
+ }
+
+
   render(){
+    console.log(this.state.Avatar)
     //用于邮箱的自动完成
     const { result } = this.state;
     const children = result.map(email => <Option key={email}>{email}</Option>);
+
+    //存放所有图片的地址
+    const avatarList='atongmu,baicai,boluo,haidao,kongshao,tuzi,women,xiaowanzi,xinpuseng,yazi,yifu,zhanshi'
+                       .split(',')
+                       .map(v=>({
+                         icon:'/avatar/'+v+'.jpeg',
+                         text:v
+                       }));
+
     return (
       <div>
       <Row type="flex" justify="start">
-        <Col span={2} xs>
-          <a href="#"><Avatar size="large" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/></a>
+        <Col span={2}>
+          <a onClick={()=>this.selectAvatar()} ><Avatar size="large" src={this.state.Avatar}/></a>
         </Col>
       <h2 >{this.state.NickName}</h2>
       </Row>
@@ -174,6 +217,28 @@ class Meinfo extends React.Component{
           <Icon type="edit" theme="twoTone" style={{'marginLeft':'1em','marginTop':'10px'}} onClick={()=>this.selectChange(6)}/>
         </Col>
       </Row>
+    {/*选择头像*/}
+      <Modal
+          title="选择你的头像"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+{/*gutter: 20, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3,*/}
+        <List
+          grid={{
+             gutter: 16, column: 4
+
+          }}
+          dataSource={avatarList}
+          renderItem={item => (
+          <List.Item>
+          <a onClick={()=>this.clickAvatar(item.icon)}>  <Avatar  size="large" src={item.icon} alt="无法显示"/> </a>
+          </List.Item>
+          )}
+        />
+        </Modal>
+
       </div>
     );
   }

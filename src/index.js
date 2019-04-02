@@ -11,6 +11,7 @@ import { BrowserRouter,Route,Switch,Redirect } from 'react-router-dom';
 import Register from './register/register';
 import Login from './login/login';
 import MyCenter from './mycenter/mycenter';
+import Authroute from './authroute/Authroute';
 
 import reducers from './reducers';
 
@@ -19,13 +20,15 @@ const store = createStore(reducers,applyMiddleware(thunk));
 ReactDOM.render(
   (<Provider store={store}>
     <BrowserRouter>
+    <div>
+      <Authroute/>
       <Switch>
         <Route path='/register' component={ Register }/>
         <Route path='/login' component={ Login }/>
         <Route path='/mycenter' component={ MyCenter }>
-
         </Route>
       </Switch>
+    </div>
     </BrowserRouter>
    </Provider>
   )

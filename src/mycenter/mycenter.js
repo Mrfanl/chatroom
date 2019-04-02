@@ -33,7 +33,7 @@ class MyCenter extends React.Component{
           {this.state.linkroute?<Redirect to={this.state.linkroute}/>:null}
           <Header_Com/>
           <Row gutter={4}>
-          <Col span={3} xs>
+          <Col span={3} >
           <div className="left-nav">
             <Menu
               onClick={this.handleClick}
@@ -47,7 +47,7 @@ class MyCenter extends React.Component{
             </Menu>
           </div>
           </Col>
-          <Col span={18} xs>
+          <Col span={18}>
           <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
           <Switch>
             <Route path={`${this.props.match.url}/meinfo`} component={Meinfo}/>
