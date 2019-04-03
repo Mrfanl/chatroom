@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar,Row,Col,Divider,Icon,Input,Select,DatePicker,Cascader,AutoComplete,Modal,List} from 'antd';
+import { Avatar,Row,Col,Divider,Icon,Input,Select,DatePicker,Cascader,AutoComplete,Modal,List,Tag} from 'antd';
 import { connect } from 'react-redux';
 import provinces from "china-division/dist/provinces.json";
 import cities from "china-division/dist/cities.json";
@@ -58,6 +58,7 @@ class Meinfo extends React.Component{
       isChange:[0,0,0,0,0,0,0],
       result: [],//用于输入邮箱
       visible:false,//用于头像选择框是否显示
+      TmpAvatar:'',//建立一个临时的Avatar，便于在修改头像时的操作
     }
   }
 
@@ -123,8 +124,12 @@ class Meinfo extends React.Component{
  handleOk = (e) => {
    this.setState({
      visible: false,
+     Avatar:this.state.TmpAvatar,
+     TmpAvatar:'',
    });
-   this.props.change_one(this.state);
+   setTimeout(()=>{
+     this.props.change_one(this.state);
+   },1000);
  }
 
 //头像选择框点击取消
@@ -144,7 +149,7 @@ class Meinfo extends React.Component{
 //点击头像选择指定的头像
  clickAvatar = (v)=>{
    this.setState({
-     Avatar:v
+     TmpAvatar:v
    });
 
  }
@@ -217,27 +222,35 @@ class Meinfo extends React.Component{
           <Icon type="edit" theme="twoTone" style={{'marginLeft':'1em','marginTop':'10px'}} onClick={()=>this.selectChange(6)}/>
         </Col>
       </Row>
-    {/*选择头像*/}
+      {/*选择头像*/}
       <Modal
-          title="选择你的头像"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-        >
-{/*gutter: 20, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3,*/}
-        <List
-          grid={{
-             gutter: 16, column: 4
+      title="选择你的头像"
+      visible={this.state.visible}
+      onOk={this.handleOk}
+      onCancel={this.handleCancel}
+      >
+      {/*gutter: 20, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3,*/}
+          <Row gutter={10}>
+              <Col span={14}>
+                  <List
+                  grid={{
+                  gutter: 16, column: 4
 
-          }}
-          dataSource={avatarList}
-          renderItem={item => (
-          <List.Item>
-          <a onClick={()=>this.clickAvatar(item.icon)}>  <Avatar  size="large" src={item.icon} alt="无法显示"/> </a>
-          </List.Item>
-          )}
-        />
-        </Modal>
+                  }}
+                  dataSource={avatarList}
+                  renderItem={item => (
+                  <List.Item>
+                  <a onClick={()=>this.clickAvatar(item.icon)}>  <Avatar  size="large" src={item.icon} alt="无法显示"/> </a>
+                  </List.Item>
+                  )}
+                  />
+              </Col>
+              <Col span={10}>
+                  <Tag color="#108ee9">已选头像:</Tag>
+                  <Avatar style={{'marginLeft':'20%'}} size="large" src={this.state.TmpAvatar} alt="无法显示"/>
+              </Col>
+          </Row>
+      </Modal>
 
       </div>
     );
